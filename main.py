@@ -8,16 +8,30 @@ from watchdog.events import FileSystemEventHandler
 # %%
 source_dir = "/Users/diegoguisande/Downloads"
 dest_dir_onedrive_documents = "/Users/diegoguisande/Desktop/for_onedrive"
-dest_dir_images = "/Users/diegoguisande/Desktop/download_images_and_screenshots" 
+dest_dir_images = "/Users/diegoguisande/Desktop/download_images_and_screenshots"
 dest_dir_videos = "/Users/diegoguisande/Desktop/downloaded_videos"
 dest_dir_documents = "/Users/diegoguisande/Desktop/downloaded_documents"
 # %%
-video_extensions = [ ".webm", ".mpg", ".mp2", ".mpeg", ".mpe", ".mpv", ".ogg",".mp4", ".mp4v", ".m4v", ".avi", ".wmv", ".mov", ".qt", ".flv", ".swf", ".avchd"]
+video_extensions = [
+".webm", ".mpg", ".mp2", ".mpeg", ".mpe", ".mpv", ".ogg",
+".mp4", ".mp4v", ".m4v", ".avi", ".wmv", ".mov", ".qt",
+".flv", ".swf", ".avchd"
+]
 document_extensions = [ ".doc", ".docx", ".odt",".pdf", ".xls", ".xlsx", ".ppt", ".pptx"]
 berkeley_extensions = ["UC", "Berkeley", "status","report", "kickoff", "meeting", "meetings"]
-image_extensions = [".jpg", ".jpeg", ".jpe", ".jif", ".jfif", ".jfi", ".png", ".gif", ".webp", ".tiff", ".tif", ".psd", ".raw", ".arw", ".cr2", ".nrw",".k25", ".bmp", ".dib", ".heif", ".heic", ".ind", ".indd", ".indt", ".jp2", ".j2k", ".jpf", ".jpf", ".jpx", ".jpm", ".mj2", ".svg", ".svgz", ".ai", ".eps", ".ico"]
+image_extensions = [
+    ".jpg", ".jpeg", ".jpe", ".jif", ".jfif", ".jfi", ".png", ".gif", ".webp", ".tiff",
+    ".tif", ".psd", ".raw", ".arw", ".cr2", ".nrw",".k25", ".bmp", ".dib", ".heif", ".heic",
+    ".ind", ".indd", ".indt", ".jp2", ".j2k", ".jpf", ".jpf", ".jpx", ".jpm", ".mj2", ".svg",
+    ".svgz", ".ai", ".eps", ".ico"
+]
 # %%
 class MoverHandler(FileSystemEventHandler):
+    """
+        this is the class that inherits the 'on_modified' method from the FileSystemEventHandler
+        and is where we define the class methods that will be used whenever
+        there is a change to the Filesystem
+    """
     def on_modified(self, event):
         with os.scandir(source_dir) as entries:
             for entry in entries:
@@ -28,6 +42,11 @@ class MoverHandler(FileSystemEventHandler):
                 self.check_customer_files(entry)
 
     def check_customer_files(self, entry):
+        """
+            loops through the defined extension list, and if any items in the list are 
+            found in the os.DirEntry object, then it moves the entry to the pre-defined destination
+            folder
+        """
         for keyword in berkeley_extensions:
             if os.path.exists(entry):
                 if entry.name.__contains__(keyword.lower()) or entry.name.__contains__(keyword.upper()):
@@ -60,10 +79,10 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO,
                         format='%(asctime)s - %(message)s',
                         datefmt='%Y-%m-%d %H:%M:%S')
-    path = source_dir
+    PATH = source_dir
     event_handler = MoverHandler()
     observer = Observer()
-    observer.schedule(event_handler, path, recursive=True)
+    observer.schedule(event_handler, PATH, recursive=True)
     observer.start()
     try:
         while True:
