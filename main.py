@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 # %%
 import os
 import shutil
@@ -35,11 +36,22 @@ class MoverHandler(FileSystemEventHandler):
     def on_modified(self, event):
         with os.scandir(source_dir) as entries:
             for entry in entries:
-                name = entry.name
                 self.check_video_files(entry)
                 self.check_image_files(entry)
                 self.check_document_files(entry)
                 self.check_customer_files(entry)
+    
+    def make_unique(self, path):
+        """
+        this method helps to create a new file name if there is another in the same place. 
+        """
+        filename, extension = os.path.splitext(path) # returns a tuple with the filename, then the extension
+        counter = 1
+    # * IF FILE EXISTS, ADDS NUMBER TO THE END OF THE FILENAME
+        while os.path.exists(path):
+            path = f"{filename} ({counter}){extension}"
+            counter += 1
+        return path
 
     def check_customer_files(self, entry):
         """
@@ -50,6 +62,8 @@ class MoverHandler(FileSystemEventHandler):
         for keyword in berkeley_extensions:
             if os.path.exists(entry):
                 if entry.name.__contains__(keyword.lower()) or entry.name.__contains__(keyword.upper()):
+                    #new_path = self.make_unique(entry)
+                    #os.rename(entry.path, new_path)
                     shutil.move(entry.path, dest_dir_onedrive_documents)
                     logging.info(f"Moved Customer File: {entry.name}") 
 
@@ -57,20 +71,29 @@ class MoverHandler(FileSystemEventHandler):
         for extension in document_extensions:
             if os.path.exists(entry):
                 if entry.name.endswith(extension) or entry.name.endswith(extension.upper()):
+                    #new_path = self.make_unique(entry)
+                    #os.rename(entry.path, new_path)
+                    print(entry.path)
                     shutil.move(entry.path, dest_dir_documents)
                     logging.info(f"Moved Document file: {entry.name}")
 
     def check_image_files(self, entry):
         for extension in image_extensions:
             if os.path.exists(entry):
-                if entry.name.endswith(extension) or entry.name.endswith(extension.upper()): 
+                if entry.name.endswith(extension) or entry.name.endswith(extension.upper()):
+                    #new_path = self.make_unique(entry)
+                    #os.rename(entry.path, new_path)
                     shutil.move(entry.path, dest_dir_images) 
                     logging.info(f"Moved Image file: {entry.name}")
 
     def check_video_files(self, entry):
         for extension in video_extensions:
             if os.path.exists(entry):
-                if entry.name.endswith(extension) or entry.name.endswith(extension.upper()): 
+                if entry.name.endswith(extension) or entry.name.endswith(extension.upper()):
+
+                    #new_path = self.make_unique(entry)
+                    #os.rename(entry.path, new_path)
+
                     shutil.move(entry.path, dest_dir_videos)
                     logging.info(f"Moved Video file: {entry.name}")
 
