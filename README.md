@@ -20,7 +20,8 @@
 
 > the variable listed as `source_dir` is where you will put the full path
 
-<img width="900" alt="Screen Shot 2022-06-11 at 8 59 34 PM" src="https://user-images.githubusercontent.com/36752256/173213886-457ab9c5-dc79-4678-a646-15bd07f17716.png">
+
+<img width="850" alt="Screen Shot 2022-06-06 at 3 37 58 PM" src="https://user-images.githubusercontent.com/36752256/173213881-75bdb4be-3d7a-4329-a5dd-80edab54ccb7.png">
 
 This screenshot shows that I wanwt this script to manage my Downloads folder.
 
@@ -29,7 +30,7 @@ This screenshot shows that I wanwt this script to manage my Downloads folder.
 > the other variables listed after `source_dir` are where you will put the 
 absolute paths of the locations you want to put your files once they are organized.
 
-<img width="850" alt="Screen Shot 2022-06-06 at 3 37 58 PM" src="https://user-images.githubusercontent.com/36752256/173213881-75bdb4be-3d7a-4329-a5dd-80edab54ccb7.png">
+<img width="900" alt="Screen Shot 2022-06-11 at 8 59 34 PM" src="https://user-images.githubusercontent.com/36752256/173213886-457ab9c5-dc79-4678-a646-15bd07f17716.png">
  
 
 ### Script Overview
