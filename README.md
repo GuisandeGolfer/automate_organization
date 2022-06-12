@@ -36,15 +36,15 @@ absolute paths of the locations you want to put your files once they are organiz
 ### Script Overview
 
 1. First, we import all the necessary modules
-    - os, shutil
-    - time
-    - logging
-    - watchdog
+    - `os, shutil`
+    - `time`
+    - `logging`
+    - `watchdog`
 2. Next, we enter in our folder locations that we want to have our files moved to.
-    - dest_dir_onedrive_documents
-    - dest_dir_images
-    - dest_dir_videos
-    - dest_dir_documents
+    - `dest_dir_onedrive_documents`
+    - `dest_dir_images`
+    - `dest_dir_videos`
+    - `dest_dir_documents`
 4. Then, we create our "MoverHandler" python class that will hold the methods for checking any new files added to `source_dir`
 5. Lastly, we instaniate our `observer` object from the `watchdog` module
     - the object needs a `PATH` to watch for changes, an `event_handler` to use to handle those changes in path
