@@ -7,7 +7,7 @@ import logging
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 # %%
-source_dir = "/Users/diegoguisande/Downloads"
+source_dir = "/Users/diegoguisande/Desktop"
 dest_dir_onedrive_documents = "/Users/diegoguisande/Desktop/for_onedrive"
 dest_dir_images = "/Users/diegoguisande/Desktop/download_images_and_screenshots"
 dest_dir_videos = "/Users/diegoguisande/Desktop/downloaded_videos"
@@ -101,16 +101,16 @@ class MoverHandler(FileSystemEventHandler):
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO,
                         format='%(asctime)s - %(message)s',
-                        datefmt='%Y-%m-%d %H:%M:%S')
-    PATH = source_dir
-    event_handler = MoverHandler()
-    observer = Observer()
-    observer.schedule(event_handler, PATH, recursive=True)
-    observer.start()
+                        datefmt='%Y-%m-%d %H:%M:%S') # initialize the logging instance
+    PATH = source_dir # rename source_dir to observer instance syntax
+    event_handler = MoverHandler() # create an instance of our 'MoverHandler' class 
+    observer = Observer() # create an observer object
+    observer.schedule(event_handler, PATH, recursive=True) 
+    # assign an observer to watch a certain "PATH" and use relavent methods from your "event_handler"
+    observer.start() # start your instance
     try:
         while True:
             sleep(10)
     except KeyboardInterrupt:
         observer.stop()
-    observer.join()
-# %%
+        observer.join()
