@@ -11,7 +11,7 @@ echo "Let's start by configuring a couple of file locations ..."
 
 sleep 2 
 
-echo "What path do you want this script to monitor changes? ('Desktop', 'Downloads', or full-path-name"
+echo "What path do you want this script to monitor changes? ('Desktop', 'Downloads', or full-path-name like '/Users/-user-/Desktop/this_folder'"
 
 read source_dir
 
@@ -25,7 +25,7 @@ elif [[ $source_dir -eq "Downloads" ]]; then
     source_dir="/Users/$user/Downloads"
     export source_dir
 else
-    echo "CooL! went with your own custom path location"
+    echo "Cool! went with your own custom path location"
     export source_dir
 fi
 
@@ -36,31 +36,48 @@ fi
 #        1. [x] fill out the rest of the directory instantiating
 #        2. [x] figure out how to add those variables into my python script automatically (exporting variable and then pulling them later into python script)
 #        3. [x] and then run "main.py" (just write "python3 main.py" directly in the bash script)
-#        4. add error-handling for when bash runs the commands "python3 main.py" 
+#        4. [] add error-handling for when bash runs the commands "python3 main.py" 
+#        5. [] when a user says 'no' make the program start running again from line 46 
+#        6. [] when the user types a folder name, add in the rest of the full path information to the variable passed to the python script
+#
 
-echo "Where do you want to put images?"
+
+
+echo "Where do you want to put images? i.e. '<full-path-name>/images' or '.../images' will auto-popoulate the rest of the path with the current working directory"
 
 read image_location
-
-echo "gotcha, folder name recieved" 
-
-export image_location
 
 echo "...videos?"
 
 read video_directory
-export video_directory
 
 echo "...customer documents?"
 
 read customer_result
-export customer_result 
 
 echo "do you want to designate a location for one_drive?"
 
 read one_drive_result
+
+echo -e " Is this information correct? ('yes' or 'no'): \n $source_dir \n $image_location \n $video_directory \n $customer_result \n $one_drive_result"
+
+read response
+
+if [[ "$response" == "yes" ]]; then
+        echo "nice starting the python script with your folder choices, below this line of text ... Good Luck!"
+        sleep 2
+else
+        echo "gosh darn it bobby"
+        sleep 2
+fi
+
+# export all confirmed variables
+
+export image_location
+export video_directory
+export customer_result
 export one_drive_result
 
-echo -e " Is this information correct?: \n $source_dir \n $image_location \n $video_directory \n $customer_result \n $one_drive_result"
+# since the command below is a child-process, 'main.py' will have access to the environment variables defined and exported in this script.
 
 python3 main.py
