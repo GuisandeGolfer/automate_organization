@@ -7,18 +7,19 @@ import logging
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 # %%
-source_dir = "/Users/diegoguisande/Desktop"
-dest_dir_onedrive_documents = "/Users/diegoguisande/Desktop/for_onedrive"
-dest_dir_images = "/Users/diegoguisande/Desktop/download_images_and_screenshots"
-dest_dir_videos = "/Users/diegoguisande/Desktop/downloaded_videos"
-dest_dir_documents = "/Users/diegoguisande/Desktop/downloaded_documents"
+source_dir = os.environ.get('source_dir')
+# %% 
+dest_dir_images = os.environ.get('image_location') 
+dest_dir_onedrive_documents = os.environ.get('one_drive_result')
+dest_dir_videos = os.environ.get('video_directory')
+dest_dir_documents = os.environ.get('customer_result') 
 # %%
 video_extensions = [
 ".webm", ".mpg", ".mp2", ".mpeg", ".mpe", ".mpv", ".ogg",
 ".mp4", ".mp4v", ".m4v", ".avi", ".wmv", ".mov", ".qt",
 ".flv", ".swf", ".avchd"
 ]
-document_extensions = [ ".doc", ".docx", ".odt",".pdf", ".xls", ".xlsx", ".ppt", ".pptx"]
+document_extensions = [ ".doc", ".docx", ".odt",".pdf", ".xls", ".xlsx", ".ppt", ".pptx", ".txt"]
 berkeley_extensions = ["UC", "Berkeley", "status","report", "kickoff", "meeting", "meetings"]
 image_extensions = [
     ".jpg", ".jpeg", ".jpe", ".jif", ".jfif", ".jfi", ".png", ".gif", ".webp", ".tiff",
