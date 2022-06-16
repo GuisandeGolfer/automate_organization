@@ -7,27 +7,50 @@ echo "Welcome to the Python Watchdog Folder Automation Tool"
 
 sleep 2
 
-echo "Let's start by configuring a couple of file locations ..."
+function configure_file_locations {
+    echo "Let's start by configuring a couple of file locations ..."
 
-sleep 2 
+    sleep 2 
 
-echo "What path do you want this script to monitor changes? ('Desktop', 'Downloads', or full-path-name like '/Users/-user-/Desktop/this_folder'"
+    echo "What path do you want this script to monitor changes? ('Desktop', 'Downloads', or full-path-name like '/Users/-user-/Desktop/this_folder'"
 
-read source_dir
+    read source_dir
 
-if [[ $source_dir -eq "Desktop" ]]; then  
-    echo "Desktop is a nice location to de-clutter"
-    source_dir="/Users/$user/Desktop"
-    export source_dir
+    if [[ $source_dir -eq "Desktop" ]]; then  
+        echo "Desktop is a nice location to de-clutter"
+        source_dir="/Users/$user/Desktop"
+        export source_dir
 
-elif [[ $source_dir -eq "Downloads" ]]; then
-    echo "Downloads folder works! keep it nice and organized"
-    source_dir="/Users/$user/Downloads"
-    export source_dir
-else
-    echo "Cool! went with your own custom path location"
-    export source_dir
-fi
+    elif [[ $source_dir -eq "Downloads" ]]; then
+        echo "Downloads folder works! keep it nice and organized"
+        source_dir="/Users/$user/Downloads"
+        export source_dir
+    else
+        echo "Cool! went with your own custom path location"
+        export source_dir
+    fi
+    echo "Where do you want to put images? i.e. '<full-path-name>/images' or '.../images' will auto-popoulate the rest of the path with the current working directory"
+
+    read image_location
+
+    echo "...videos?"
+
+    read video_directory
+
+    echo "...customer documents?"
+
+    read customer_result
+
+    echo "do you want to designate a location for one_drive?"
+
+    if [[ $one_drive_result == "yes" ]]; then
+        
+        read one_drive_result
+
+    fi 
+} 
+
+configure_file_locations 
 
 # tip: make sure there is a space next to the colon for doing multi-line comments
 
@@ -40,25 +63,6 @@ fi
 #        5. [] when a user says 'no' make the program start running again from line 46 
 #        6. [] when the user types a folder name, add in the rest of the full path information to the variable passed to the python script
 #
-
-
-
-echo "Where do you want to put images? i.e. '<full-path-name>/images' or '.../images' will auto-popoulate the rest of the path with the current working directory"
-
-read image_location
-
-echo "...videos?"
-
-read video_directory
-
-echo "...customer documents?"
-
-read customer_result
-
-echo "do you want to designate a location for one_drive?"
-
-read one_drive_result
-
 echo -e " Is this information correct? ('yes' or 'no'): \n $source_dir \n $image_location \n $video_directory \n $customer_result \n $one_drive_result"
 
 read response
@@ -67,8 +71,9 @@ if [[ "$response" == "yes" ]]; then
         echo "nice starting the python script with your folder choices, below this line of text ... Good Luck!"
         sleep 2
 else
-        echo "gosh darn it bobby"
-        sleep 2
+        configure_file_locations
+        # find a way to loop this script back to the original folder question at line 46
+            # maybe I can write a function in bash? that way I can run the folder logic within this 'else' statement
 fi
 
 # export all confirmed variables
