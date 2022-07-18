@@ -5,13 +5,19 @@ if [[ $OSTYPE == 'darwin'* ]]; then
 else
     echo 'not-MacOS'
 fi
+
+_DEBUG="on"
+
+function DEBUG() 
+{
+        [ "$_DEBUG" == "on" ] && $@
+}
+
+
 # tip: make sure there is a space next to the colon for doing multi-line comments
 
 #    Everything is operational above this multi-line comments
 #    all I need to do next is 
-#        1. [x] fill out the rest of the directory instantiating
-#        2. [x] figure out how to add those variables into my python script automatically (exporting variable and then pulling them later into python script)
-#        3. [x] and then run "main.py" (just write "python3 main.py" directly in the bash script)
 #        4. [] add error-handling for when bash runs the commands "python3 main.py" 
 #        5. [] when the user types a folder name, add in the rest of the full path information to the variable passed to the python script
 #        6. [x] when a user says 'no' make the program start running again from line 46 
@@ -50,4 +56,4 @@ export one_drive_result
 
 # since the command below is a child-process, 'main.py' will have access to the environment variables defined and exported in this script.
 
-python3 main.py
+DEBUG python3 main.py
