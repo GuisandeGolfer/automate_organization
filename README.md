@@ -49,10 +49,18 @@ absolute paths of the locations you want to put your files once they are organiz
 5. Lastly, we instaniate our `observer` object from the `watchdog` module
     - the object needs a `PATH` to watch for changes, an `event_handler` to use to handle those changes in path
     - and whether you want it to recursively check the `path` that is given. 
+---
 
+### FAQ
 
+Q: What about if I am using a Windows machine?
+        > then the script will automatically detect your OS and change your folder format to match a Windows operating system :) 
 
+Q: What about if I am using a Windows machine?
+        > then the script will automatically detect your OS and change your folder format to match a Windows operating system :): 
 
+Q: What about if I am using a Windows machine?
+        > then the script will automatically detect your OS and change your folder format to match a Windows operating system :): 
 
-
-
+Q: What about if I am using a Windows machine?
+        > then the script will automatically detect your OS and change your folder format to match a Windows operating system :): 
