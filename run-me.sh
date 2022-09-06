@@ -13,27 +13,27 @@ function DEBUG()
         [ "$_DEBUG" == "on" ] && $@
 }
 
-
 # tip: make sure there is a space next to the colon for doing multi-line comments
 
 #    Everything is operational above this multi-line comments
 #    all I need to do next is 
-#        4. [] add error-handling for when bash runs the commands "python3 main.py" 
+#        4. [x] add error-handling for when bash runs the commands "python3 main.py" 
 #        5. [] when the user types a folder name, add in the rest of the full path information to the variable passed to the python script
 #        6. [x] when a user says 'no' make the program start running again from line 46 
 #
 user=$(whoami)
 current_directory=$(pwd)
 
+# load the dialogue_func.sh script into this running program. 
 source dialogue_func.sh
 
 
-echo "Welcome to the Python Watchdog Folder Automation Tool"
+echo "Welcome to the Python Watchdog Organization Tool"
 
 sleep 2
 
+# continue this process from within this function
 configure_file_locations 
-
 
 echo -e " Is this information correct? ('yes' or 'no'): \n $source_dir \n $image_location \n $video_directory \n $customer_result \n $one_drive_result"
 
