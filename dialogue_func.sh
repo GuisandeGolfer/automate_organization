@@ -1,5 +1,6 @@
 #!/usr/bin/env/ bash
 
+
 function configure_file_locations {
     echo "Let's start by configuring a couple of file locations ..."
 
@@ -29,6 +30,7 @@ function configure_file_locations {
     if [[ $image_location -eq "images" ]]; then
         echo "Images going into /images...that makes sense..nice."
         image_location="/Users/$user/Desktop/Images" # can changes this later once the code actually works. 
+    fi
 
     echo "...videos?"
 
@@ -38,6 +40,7 @@ function configure_file_locations {
         echo "videos going into /videos...that makes sense..nice."
         video_directory="/Users/$user/Desktop/Videos" # can changes this later once the code actually works. 
 
+    fi
 
     echo "...customer documents?"
 
@@ -46,8 +49,6 @@ function configure_file_locations {
     if [[ $customer_result -eq "customer_docs" ]]; then
         echo "customers are in safe hands...that's awesome...nice."
         customer_result="/Users/$user/Desktop/customer_docs" # can changes this later once the code actually works. 
-
-#### BOOKMARK
-
+    fi
 }
 

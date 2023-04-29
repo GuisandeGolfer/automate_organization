@@ -27,13 +27,12 @@ current_directory=$(pwd)
 # load the dialogue_func.sh script into this running program. 
 source dialogue_func.sh
 
-
 echo "Welcome to the Python Watchdog Organization Tool"
 
 sleep 2
 
 # continue this process from within this function
-configure_file_locations 
+source ./dialogue_func
 
 echo -e " Is this information correct? ('yes' or 'no'): \n $source_dir \n $image_location \n $video_directory \n $customer_result \n $one_drive_result"
 
@@ -43,7 +42,7 @@ if [[ "$response" == "yes" ]]; then
         echo "nice starting the python script with your folder choices, below this line of text ... Good Luck!"
         sleep 1
 else
-        configure_file_locations
+        dialogue_func.sh
 fi
 
 # export all confirmed variables
